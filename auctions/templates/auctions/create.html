@@ -1,0 +1,156 @@
+{% extends "auctions/layout.html" %}
+{% block css %}
+    <style type="text/css">
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            }
+        .user_card {
+            width: 350px;
+            margin-top: auto;
+            margin-bottom: auto;
+            background: #2B2B2B;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            padding: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border-radius: 5px;
+        }
+
+        .form_container {
+            margin-top: 20px;
+
+        }
+
+        #form-title{
+            color: #fff;
+        }
+        .login_btn {
+            width: 100%;
+            background-color: #485461;
+            background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+            color: white !important;
+            border: 25px;
+        }
+        .login_btn:focus {
+            box-shadow: none !important;
+            outline: 0px !important;
+        }
+        .login_container {
+            padding: 0 2rem;
+
+        }
+
+        #messages{
+            background-color: #435055;
+            color: #fff;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        #id_expires{
+            background-color: black;
+            color: white;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+            <div class="user_card">
+                <div class="d-flex justify-content-center">
+                    <h3 id="form-title">New Product</h3>
+                </div>
+                <div class="d-flex justify-content-center form_container">
+
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="d-flex justify-content-center mt-3">
+                            <div class="input-prepend">
+                                <p class="d-flex justify-content-center" style="margin-bottom: 0px">Name</p>
+                                {{form.title}}
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center mt-3">
+                            <div class="input-prepend">
+                                <p class="d-flex justify-content-center" style="margin-bottom: 0px">Short description</p>
+                                {{form.shortDescription}}
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center mt-3">
+                            <div class="input-prepend">
+                                <p class="d-flex justify-content-center" style="margin-bottom: 0px">Category</p>
+                                {{form.category}}
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center mt-3">
+                            <div class="input-prepend">
+                                <p class="d-flex justify-content-center" style="margin-bottom: 0px">Upload image</p>
+                                {{form.image}}
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center mt-3">
+                            <div class="input-prepend">
+                                <p class="d-flex justify-content-center" style="margin-bottom: 0px">Price</p>
+                                {{form.price}}
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center mt-3">
+                            <div class="input-prepend">
+                                <p class="d-flex justify-content-center" style="margin-bottom: 0px">Description</p>
+                                {{form.description}}
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center mt-3">
+                            <div class="input-prepend">
+                                <p class="d-flex justify-content-center" style="margin-bottom: 0px">Expiry</p>
+                                <label for="id_expires" class="add-on">
+                                    <i class="fa fa-calendar"></i>
+                                </label>
+                                {{form.expires}}
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                            <input class="btn login_btn" type="submit" value="Submit">
+                        </div>
+                    </form>
+                </div>
+
+                {{form.errors}}
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <div class="alert alert-warning text-center mt-5" role="alert">
+            <h2>Please Log In</h2>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block js %}
+<script>
+    // For JQuery UI Calendar
+    $(function() {
+        $( "#id_expires" ).datetimepicker({ 
+            dateFormat: 'yy-mm-dd', 
+            maxDate: 7, 
+            minDate: 0 , 
+            controlType: 'select', 
+        }).attr("autocomplete", "off");
+
+        $("#id_expires").on("change", function () {
+            var id = $(this).attr("id");
+            var val = $("label[for='" + id + "']").text();
+            $("#msg").text(val + " changed");
+        });
+    });
+</script>
+{% endblock %}

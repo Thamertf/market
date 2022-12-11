@@ -1,0 +1,37 @@
+{% extends "auctions/layout.html" %}
+{% block title %}<title>My Auctions</title>{% endblock %}
+{% block body %}
+
+<h2> My auctions </h2>
+
+
+
+    <div class="container mt-4">
+        <h2 class="mb-4">{% if active %} Active Listings {% else %} Closed Auctions {% endif %}</h2>
+        <div class="row">
+            {% for auction in my_auctions_list %}
+                <div class="col-lg-3 col-md-6 mb-4 d-flex justify-content-center">
+                    <div class="card mb-3 text-center" style="max-width: 18rem;">
+                        <a class="card-custom text-dark" href="{% url 'item' auction.id %}" style="text-decoration: none;">
+                            <div class="card-header">
+                                <strong> {{ auction.title }} 
+                                {% if auction.active == False %}
+                                    <br><span style="color: #d53343;">(Auction Closed)</span>
+                                {% endif %}
+                                </strong>
+                            </div>
+                            <div><img src={{ list.image }} alt="{{ auction.title }}" class="list-img-custom" style="max-width: 100px; max-height: 100px" /></div>
+                            <div class="text-dark"><p>{{ auction.shortDescription }}</p></div>
+                            <div class="card-footer text-dark">
+                                <p>Current Price: ${{ auction.price }}</p>
+                                <p><span style="color: #0d6efd; font-size: 1rem">Created by {{ auction.user }}</span></p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}

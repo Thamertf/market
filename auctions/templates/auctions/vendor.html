@@ -1,0 +1,120 @@
+
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+
+<!doctype html>
+<html lang="en">
+
+
+
+    <div class="container">
+
+        <div class="my-1">
+        <div id="jswarning"></div>
+    </div>
+
+<div class="mt-2">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card rounded-0">
+                <small class="text-white text-center"><font color="red">Seller Profile Page</font></small>
+            </div>
+        </div>
+    </div>
+    <div class="row-md-10 mt-2">
+
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card-body profile-card mb-5" >
+    <div class="card-body bg-mgray text-white rounded-0 border-primary">
+        <div class="row">
+            <div class="col-sm-3">
+                <p class="btn btn-sm btn-mgray w-100 text-left active" style="color: white"><small>{{account.user.username}} <i class="fas fa-user-circle"></i></small></a></p>
+                                    <p class="btn btn-sm btn-warning w-100 active text-left"><small>Vendor is not FE Approved <i class="fas fa-exclamation-circle"></i></small></p>
+                                <p> <span class="btn btn-sm w-100 text-left  btn-success  active" style="cursor:default"><small>Vendor Level 1 - 5.7K Points <i class="fas fa-level-up-alt"></i></small></span>
+                    <span class=""><small><font color="red"></font></small></span></p>
+                                                <p class="btn btn-sm btn-light w-100 text-left active"><span><small>Member Since <span class="font-weight-semibold">May/2022 <i class="fas fa-check"></i></span></small></span></p>
+                <p class="btn btn-sm btn-light w-100 text-left active"><span><small>Vendor Since <span class="font-weight-semibold">May/2022 <i class="fas fa-check"></i></span></small></span></p>
+                <p class="btn btn-sm btn-light w-100 text-left active"><span><small>Disputes (<span class="text-success">Won</span>-<span class="text-danger">Lost</span>) : <span class="text-success font-weight-semibold">0</span>-<span class="text-danger font-weight-semibold">0</span> <i class="fas fa-gavel"></i></small></span></p>
+                <p class="btn btn-sm btn-light w-100 text-left active"><span><small>Total Orders <span class="font-weight-semibold">6 <i class="fas fa-check"></i></span></small></span></p><br>
+                <p class="btn btn-sm btn-light w-100 text-left active"><span><small>Orders Rated <span class="font-weight-semibold">6 <i class="fas fa-check"></i></span></small></span></p>
+                <p class="btn btn-sm btn-light w-100 text-left active"><small><span class="fas fa-plus-circle text-success"></span> 5
+                        Positive <i class="fas fa-thumbs-up"></i></small></p>
+                <p class="btn btn-sm btn-light w-100 text-left"><small><span class="fas fa-stop-circle text-secondary"></span> 1
+                        Neutral <i class="fas fa-sad-tear"></i></small></p>
+                <p class="btn btn-sm btn-light w-100 text-left"><small><span class="fas fa-minus-circle text-danger"></span> 0
+                        Negative <i class="fas fa-thumbs-down"></i></small></p>
+                <p class="btn btn-sm btn-mgray w-100 text-left active"><small>Quality - <span>
+              <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+
+    <i class="far fa-star"></i>
+                        </span></small></p>
+                <p class="btn btn-sm btn-mgray w-100 text-left active"><small>Communication - <span>
+            <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+
+    <i class="far fa-star"></i>
+                        </span></small></p>
+                <p class="btn btn-sm btn-mgray w-100 text-left active"><small>Delivery Time - <span>
+            <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+
+    <i class="far fa-star"></i>
+                        </span></small></p>
+            </div>
+            <div class="col-sm-6 text-center">
+                                <div class="btn btn-sm btn-light w-100 active"><small>Last Seen: 1 hour ago <i class="fas fa-thumbs-up"></i></small></div>
+                                <div class="card border-primary bg-mgray text-white my-3">
+                    <p style="white-space: pre-line"><small>
+                            
+                        </small>
+                    </p>
+                </div>
+                </div>
+                <div class="col-sm-3 text-right">
+                    <div class="text-center my-2">
+                        <img src="/uploads/avatars/vendor.jpg" class="img-fluid" style="width:225px; height:225px; float: end; border-radius:5%;">
+                    </div>
+                    <p>
+                        <a href="{% url 'new-conversation' account.user %}" class="btn btn-sm btn-dark w-100"><small>Contact Vendor <span class="fas fa-envelope"></span></small></a></p>
+                    <a href="{% url 'vendorshop' account.user %}" class="btn btn-light btn-sm w-100"><small>View Vendor Shop <span class="fas fa-store-alt"></span></small></a>
+                    <a href="" class="btn btn-warning btn-sm w-100 my-3"><small>View All Feedback <span class="fas fa-file-export"></span></small></a>
+
+
+
+                                                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+            </div>
+        
+
+
+</div>
+</div>
+
+    <div class="container">
+</div>
+</div>
+
+</div></body>
+</html>
+
+
+{% endblock %}

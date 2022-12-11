@@ -1,0 +1,140 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+
+
+<!doctype html>
+<html lang="en">
+<div class="container">
+<small>
+
+</small>
+
+
+    <div class="container">
+<div class="row">
+<div class="col-md-12">
+<p class="alert alert-danger text-center rounded-0 my-2"><small style="color: black;">Before doing anything else, add your payment address to receive refunds and payments. <a href="#" class="alert-link">Add Payment Address!</a></small></p>
+</div>
+</div>
+        <div class="my-1">
+    </div>
+
+<div class="mt-2">
+
+<div class="row">
+  <div class="col-md-12">
+          
+
+   <div class="row my-4">
+      <div class="col-md-6">
+         <div class="card">
+            <small class="badge rounded-0">Change Password</small>
+            <form action="#" method="POST" class="justify-content-between">
+               <input type="hidden" name="_token" value="ELZRd4zIlmwIKwiINpyR4NskRaCeU0zURwufNuzI">
+               <div class="form-row my-2 mr-5">
+                  <label for="old_password" class="col-form-label col-md-6" style="text-align: center;"><small><span
+                                style="color: white; ">Current Password:</span></small></label>
+                  <div class="col-md-6">
+                     <input type="password" class="form-control form-control-sm  id="old_password" name="old_password" placeholder="Enter your current password">
+                  </div>
+               </div>
+               <div class="form-row my-2 mr-5">
+                  <label for="new_password" class="col-form-label col-md-6" style="text-align: center;"><small><span
+                                style="color: white; ">New Password:</span></small></label>
+                  <div class="col-md-6">
+                     <input type="password" class="form-control form-control-sm " id="new_password" name="new_password" placeholder="Enter your new password">
+                  </div>
+               </div>
+               <div class="form-row my-2 mr-5">
+                  <label for="confirm_new_password" class="col-form-label col-md-6" style="text-align: center;"><small><span
+                                style="color: white; ">Confirm New Password:</span></small></label>
+                  <div class="col-md-6">
+                     <input type="password" class="form-control form-control-sm " id="new_password_confirmation" name="new_password_confirmation" placeholder="Confirm your new password">
+                  </div>
+               </div>
+               <div class="form-row text-center justify-content-between">
+                  <div class="col-md-12 text-center">
+                                       </div>
+                  <p>
+                  <div class="col-md-12 my-2">
+                     <button class="btn btn-primary mt-3 btn-sm" type="submit" style="background-color:#222325;">Save New Password <i class="fas fa-save"></i></button>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+
+      <div class="col-md-6">
+            <div class="card h-100">
+              
+               <small class="badge w-100">Your Referral Link</small>
+              <!--
+               <center><input type="url" readonly class="form-control form-control-sm disabled w-50 my-3" value="#"></center>
+               <p class="text text-white text-center"><small>Share this address to invite new members.<br>
+                     You will earn and receive 50% of the commission earned from their purchases.<br>
+                     Commissions are paid to the set payment address in your account.</small></p>
+              -->
+              <p class="text text-white text-center">coming soon!</p>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+         
+   </div>
+   </div>
+   <div class="row">
+      <div class="col-md-6">
+         <div class="card rounded-0">
+            <small class="badge w-100">Add New Payment Addresses</small>
+            <form action="#" method="POST">
+               <input type="hidden" name="_token" value="ELZRd4zIlmwIKwiINpyR4NskRaCeU0zURwufNuzI">
+               <div class="form-row">
+                  <div class="col-md-12">
+                     <center><input type="text" class="form-control form-control-sm d-flex w-75 my-3" name="address" id="address" placeholder="Please paste your new payment address here"></center>
+                  </div>
+                  <div class="col-md-12 my-2">
+                     <center><select name="coin" id="coin" class="form-control form-control-sm d-flex w-75">
+                           <option>Currency</option>
+                                                         <option value="btc">BTC</option>
+                                                         <option value="xmr">XMR</option>
+                                                   </select></center>
+                  </div>
+                  <div class="col-md-12 my-2">
+                     <p class="text text-white text-center"><small>All funds are always sent to the last added payment address in it's selected currency.</small></p>
+                     <center><button class="btn btn-primary mt-3 btn-sm" style="background-color: #222325;">Add New Payment Address <i class="fas fa-money-check"></i></button></center>
+                  </div>
+            </form>
+         </div>
+      </div>
+   </div>
+   <div class="col-md-6">
+      <div class="card h-100">
+         <small class="badge w-100">Your Current Payment Addresses By Currency</small>
+                     <center><div class="col-md-8 my-2">
+                  <div class="alert alert-sm text-center alert-danger rounded-0"><small style="color: black;">You have not listed any payment address!<br>
+                        Please add at least one.<br>
+                        This is needed to process referral commissions and refunds or payments if you are a vendor.</small></center>
+               </div>
+
+</div>
+</div>
+</div>
+
+
+    <div class="container">
+</div>
+</div>
+
+</div></body>
+</html>
+
+
+
+
+
+
+{% endblock %}

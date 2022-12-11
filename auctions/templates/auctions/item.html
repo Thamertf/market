@@ -1,0 +1,148 @@
+{% extends "auctions/layout.html" %}
+{% block css %}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+
+    <div class="row justify-content-around flex-custom">
+        <div class="col-12">
+
+
+
+
+        </div>
+
+        <div class="col-6 d-flex flex-column justify-content-evenly align-items-center">
+        {# List item #}
+            <h3 class="align-self-start"> <strong> {{ item.title }} </strong>
+                <p><span style="color: #0d6efd; font-size: 1rem">Created by <a href="{% url 'vendor' item.user %}">{{ item.user }}</a></span></p>
+            </h3>
+            <img src={{ item.image }} alt="{{ item.title }}" class="item-img-custom mb-3" />
+            <p>{{ item.description }}</p>
+            <p class="align-self-start">Category: <a class="link" href="{% url 'category' item.category.slug %}">{{ item.category }}</a></p>
+        </div>
+        <div class="col-4">
+              
+            <div>
+                {% if item.active == True %}
+                <div class="item-watchlist-close-btn-custom">
+                    {# Add/Remove watchlist #}
+                    {% if user.is_authenticated %}
+                    <form action="{% url 'createWatchList' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="items" value="{{ item.title }}">
+                        <input type="hidden" name="items_id" value="{{ item.id }}">
+                        <div class="d-grid input-group">
+                            <button class="btn btn-outline-success" type="submit"><i class="fas fa-eye"></i> {{ watchlistBtnMsg }}</button>
+                        </div>
+                    </form>
+                    {% endif %}
+                {% endif %}
+                
+                    {# Close/Open auction by the creator #}
+                    {# Check logged in user is the same as who created the item #}
+                    {% if request.user == item.user %}
+                        <form action="{% url 'bid' %}" method="POST">
+                            {% csrf_token %}
+                            <div>
+                                <input type="hidden" name="item_id" value="{{ item.id }}">
+                            </div>
+                            <div class="d-grid">
+                                <input class="btn btn-outline-danger" name="activate" type="submit" value={% if item.active %} 'Edit Item' {% else %} 'Delete Item' {% endif %}>
+                            </div>
+                            
+                        </form>
+                    {% endif %}
+                </div>
+                
+                {# Bid for the item #}
+                <div>
+                    <div class="item-bid-price">
+                        <p>
+                            <strong>Current Price:<br> ${{item.price}} </strong><br>
+                        </p>
+                    </div>
+
+                    {% if user.is_authenticated %}
+                    <div>    
+                        {% if item.active %}
+                            <form action="{% url 'bid' %}" method="POST">
+                                {% csrf_token %}
+                                <label for="bid" class="form-label">Quantity:</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">x</span>
+                                    <input type="hidden" name="item_id" value="{{ item.id }}">                               
+                                    <input type="number" step="any" class="form-control" name="bid" id="bid" value="" max="500">
+                                </div>
+                                <div class="d-grid">
+                                    <input class="btn btn-outline-primary mt-3" type="submit" value="Buy">
+                                </div>
+                            </form>
+                        {% elif item.active == False %}
+                            <div class="alert alert-warning text-center" role="alert">
+                                The product is no longer available
+                            </div>
+                            
+                        {% endif %}
+
+                    </div>
+                    {% endif %}
+                </div>
+            </div>        
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-8">
+        {% if user.is_authenticated %}
+        {# Add comments #}
+            <hr>
+            <p>Leave a comment:</p>
+            <form action="{% url 'comment' %}" method="POST">
+                {% csrf_token %}
+                <div>
+                    <input type="hidden" name="item_id" value="{{ item.id }}">
+                    <textarea class="form-control" name="comment" rows="3" cols="40" maxlength="512"></textarea>
+                </div>
+                <div class="item-comment-btn-custom">
+                    <input class="btn btn-outline-primary" type="submit" value="Submit">
+                </div>
+            </form>
+            {% endif %}
+        </div>
+
+
+        {# List comments #} {# There are no comments. #}
+        <div class="col-8">
+            <div>
+                <h1>Comments:</h1>
+                <hr>
+                {% if comments %}
+                    {% for comment in comments %} 
+                        <div class="card card-comments bg-dark">
+                            <div class="card-header bg-dark">
+                                <h7>
+                                    <i class="fas fa-user"></i><strong>&ensp;{{ comment.user }}</strong>
+                                    <span style="float:right;"> <i class="fas fa-clock"></i>&ensp;{{ comment.created }} </span>
+                                </h7>
+                            </div>
+                            <div class="card-body bg-dark">
+                                {{ comment.comment }}
+                            </div>  
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="alert alert-warning text-center" role="alert">
+                        There are no comments.
+                    </div>
+                {% endif %}  
+            </div>
+        </div>      
+    </div>
+</div>
+
+
+
+
+{% endblock %}

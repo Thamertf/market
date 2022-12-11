@@ -1,0 +1,125 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% block css %}
+
+<style type="text/css">
+    .checkbox-menu li label {
+    display: block;
+    padding: 3px 10px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    margin:0;
+    transition: background-color .4s ease;
+    }
+    .checkbox-menu li input {
+        margin: 0px 5px;
+        top: 2px;
+        position: relative;
+    }
+
+    .checkbox-menu li.active label {
+        background-color: #3A4750;
+        font-weight:bold;
+    }
+
+    .checkbox-menu li label:hover,
+    .checkbox-menu li label:focus {
+        background-color: #3A4750;
+    }
+
+    .checkbox-menu li.active label:hover,
+    .checkbox-menu li.active label:focus {
+        background-color: #3A4750;
+    }
+</style>
+
+
+
+{% endblock %}
+{% block body %}
+    <div class="card mb-4 col-md-6 d-flex justify-content-center" style="margin: auto;">
+        <h6 class="card-header card" style="border: none;">
+            <form class="d-flex" role="search" action="/search" style="width: 70%; margin: auto;">
+                <div class="input-group">
+                  <input name="q" type="text" class="form-control" placeholder="Search">
+                  <button class="btn buttony" type="submit" id="button-addon2">Search</button>
+                </div>
+            </form>
+        </h6>
+    </div>
+    <div class="container mt-4">
+        <h2 class="mb-4">{% if active %} Active Listings {% else %} Closed Auctions {% endif %}</h2>
+
+        <div class="dropdown" style="display: inline-flex;">
+          <button class="btn btn-default dropdown-toggle" type="button" 
+                  id="dropdownMenu1" data-toggle="dropdown" 
+                  aria-haspopup="true" aria-expanded="true" style="background-color: #2B2B2B; margin-bottom: 5px; ">
+              <i class="fa fa-filter" aria-hidden="true"></i>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu checkbox-menu allow-focus" aria-labelledby="dropdownMenu1" style="background-color: #2B2B2B;">
+          
+            <li >
+              <label style="color: white;">
+                <input type="checkbox">Cheese
+              </label>
+            </li>
+            
+            <li >
+              <label style="color: white;">
+                <input type="checkbox">Pepperoni
+              </label>
+            </li>
+            
+            <li >
+              <label style="color: white;">
+                <input type="checkbox">Peppers
+              </label>
+            </li>
+            
+          </ul>
+        </div>
+
+
+        <div class="row">
+            {% for list in listings %}
+                <div class="col-lg-3 col-md-6 mb-4 d-flex justify-content-center">
+                    <div class="card mb-3 text-center" style="max-width: 18rem;">
+                        <a class="card-custom text-dark bordered" href="{% url 'item' list.id %}">
+                            <div class="card-header">
+                                <strong> {{ list.title }} 
+                                {% if list.active == False %}
+                                    <br><span style="color: #d53343;">(Auction Closed)</span>
+                                {% endif %}
+                                </strong>
+                            </div>
+                            <div><img src={{ list.image }} alt="{{ list.title }}" class="list-img-custom" style="max-width: 100px; max-height: 100px" /></div>
+                            <div class="text-dark"><p>{{ list.shortDescription }}</p></div>
+                            <div class="card-footer text-dark">
+                                <p>Price: ${{ list.price }}</p>
+                                <p><span style="color: #0d6efd; font-size: 1rem">Created by {{ list.user }}</span></p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+{% block js %}
+<script type="text/javascript">
+    $(".checkbox-menu").on("change", "input[type='checkbox']", function() {
+       $(this).closest("li").toggleClass("active", this.checked);
+    });
+
+    $(document).on('click', '.allow-focus', function (e) {
+      e.stopPropagation();
+    });
+</script>
+{% endblock %}
